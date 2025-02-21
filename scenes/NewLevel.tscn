@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c53jgoad5seox"]
+
+[ext_resource type="Script" path="res://scenes/PlatformBlue.gd" id="1_3q5bw"]
+[ext_resource type="PackedScene" uid="uid://cq1xphfvs37vq" path="res://scenes/SnowPlatform.tscn" id="1_k42wm"]
+[ext_resource type="PackedScene" uid="uid://b54llvdd2c8p1" path="res://scenes/GreenShip.tscn" id="2_daxj7"]
+[ext_resource type="Script" path="res://scenes/NLObjectiveArea.gd" id="4_fwtnb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wteqw"]
+size = Vector2(140, 70)
+
+[node name="NewLevel" type="Node2D"]
+
+[node name="PlatformGreen" type="Node2D" parent="."]
+position = Vector2(1045, 612)
+script = ExtResource("1_3q5bw")
+
+[node name="SnowPlatform" parent="PlatformGreen" instance=ExtResource("1_k42wm")]
+
+[node name="SnowPlatform2" parent="PlatformGreen" instance=ExtResource("1_k42wm")]
+position = Vector2(70, 0)
+
+[node name="GreenShip" parent="." instance=ExtResource("2_daxj7")]
+position = Vector2(1080, 472)
+
+[node name="NLObjectiveArea" type="Area2D" parent="."]
+script = ExtResource("4_fwtnb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NLObjectiveArea"]
+position = Vector2(1080, 35)
+shape = SubResource("RectangleShape2D_wteqw")
+
+[connection signal="body_entered" from="NLObjectiveArea" to="NLObjectiveArea" method="_on_NLObjectiveArea_body_entered"]
